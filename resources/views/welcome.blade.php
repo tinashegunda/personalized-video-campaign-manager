@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Asset Tracker API</title>
+        <title>Personalized Video Campaign Manager</title>
 
         <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
         <link rel="alternate icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
@@ -55,8 +55,8 @@
         <div class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
             <main class="flex max-w-[335px] w-full flex-col-reverse lg:max-w-4xl lg:flex-row">
                 <div class="text-[13px] leading-[20px] flex-1 p-6 pb-12 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] rounded-bl-lg rounded-br-lg lg:rounded-tl-lg lg:rounded-br-none">
-                    <h1 class="mb-1 font-medium">Asset Tracker API</h1>
-                    <p class="mb-2 text-[#706f6c] dark:text-[#A1A09A]">REST API to manage Assets and their Inspections. <br>Each asset has many inspections; the API returns the latest 3 when fetching an asset.</p>
+                    <h1 class="mb-1 font-medium">Personalized Video Campaign Manager</h1>
+                    <p class="mb-2 text-[#706f6c] dark:text-[#A1A09A]">API-driven campaign management for personalized video campaigns. <br>Create campaigns and ingest per-user video records asynchronously via queues.</p>
                     <ul class="flex flex-col mb-4 lg:mb-6">
                         <li class="flex items-center gap-4 py-2 relative before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:top-1/2 before:bottom-0 before:left-[0.4rem] before:absolute">
                             <span class="relative py-1 bg-white dark:bg-[#161615]">
@@ -65,7 +65,7 @@
                                 </span>
                             </span>
                             <span>
-                                <strong>POST /api/assets</strong> – Create an asset (name, serial_number, status). Status: active, inactive, or maintenance.
+                                <strong>GET /api/health</strong> – Service health check.
                             </span>
                         </li>
                         <li class="flex items-center gap-4 py-2 relative before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:bottom-1/2 before:top-0 before:left-[0.4rem] before:absolute">
@@ -75,25 +75,30 @@
                                 </span>
                             </span>
                             <span>
-                                <strong>GET /api/assets/{id}</strong> – Return an asset with its latest 3 inspections.
+                                <strong>POST /api/campaigns</strong> – Create a campaign.
+                            </span>
+                        </li>
+                        <li class="flex items-center gap-4 py-2 relative before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:bottom-0 before:top-0 before:left-[0.4rem] before:absolute">
+                            <span class="relative py-1 bg-white dark:bg-[#161615]">
+                                <span class="flex items-center justify-center rounded-full bg-[#FDFDFC] dark:bg-[#161615] shadow-[0px_0px_1px_0px_rgba(0,0,0,0.03),0px_1px_2px_0px_rgba(0,0,0,0.06)] w-3.5 h-3.5 border dark:border-[#3E3E3A] border-[#e3e3e0]">
+                                    <span class="rounded-full bg-[#dbdbd7] dark:bg-[#3E3E3A] w-1.5 h-1.5"></span>
+                                </span>
+                            </span>
+                            <span>
+                                <strong>POST /api/campaigns/{campaign}/data</strong> – Ingest user video data (async, returns 202).
                             </span>
                         </li>
                     </ul>
                     <ul class="flex gap-3 text-sm leading-normal">
                         <li>
-                            <a href="{{ url('/api/assets/1') }}" class="inline-block dark:bg-[#eeeeec] dark:border-[#eeeeec] dark:text-[#1C1C1A] dark:hover:bg-white dark:hover:border-white hover:bg-black hover:border-black px-5 py-1.5 bg-[#1b1b18] rounded-sm border border-black text-white text-sm leading-normal">
-                                Try API: GET /api/assets/1
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/tinashegunda/asset-tracker-api" target="_blank" class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
-                                README
+                            <a href="{{ url('/api/health') }}" class="inline-block dark:bg-[#eeeeec] dark:border-[#eeeeec] dark:text-[#1C1C1A] dark:hover:bg-white dark:hover:border-white hover:bg-black hover:border-black px-5 py-1.5 bg-[#1b1b18] rounded-sm border border-black text-white text-sm leading-normal">
+                                Try API: GET /api/health
                             </a>
                         </li>
                     </ul>
                 </div>
-                <div class="bg-[#010d26] dark:bg-[#1D0002] relative lg:-ml-px -mb-px lg:mb-0 rounded-t-lg lg:rounded-t-none lg:rounded-r-lg aspect-[335/376] lg:aspect-auto w-full lg:w-[438px] shrink-0 overflow-hidden flex items-center justify-center p-8">
-                    <img src="{{ asset('images/logo.png') }}" alt="Asset Tracker" class="max-w-full h-auto max-h-12 object-contain transition-all duration-750 opacity-100">
+                <div class="bg-[#010d26] dark:bg-[#1D0002] relative lg:-ml-px -mb-px lg:mb-0 rounded-t-lg lg:rounded-t-none lg:rounded-r-lg aspect-[335/376] lg:aspect-auto w-full lg:w-[438px] shrink-0 overflow-hidden flex items-center justify-center">
+                    <img src="{{ asset('images/campaign-manager.jpg') }}" alt="Personalized Video Campaign Manager" class="h-full w-full object-cover object-center transition-all duration-750 opacity-100">
                 </div>
             </main>
         </div>
