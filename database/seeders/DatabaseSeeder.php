@@ -11,6 +11,11 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
-        // Intentionally minimal for this project.
+        $this->call([
+            ClientSeeder::class,
+            CampaignSeeder::class,
+            CampaignDataSeeder::class,
+            CampaignDataIngestLogSeeder::class,
+        ]);
     }
 }

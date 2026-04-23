@@ -21,7 +21,7 @@ This repository is structured to run with Sail.
 ```bash
 cp .env.example .env
 composer install
-php artisan key:generate
+./vendor/bin/sail artisan key:generate
 
 ./vendor/bin/sail up -d
 ./vendor/bin/sail artisan migrate
@@ -47,6 +47,34 @@ Typical `.env` values:
 - `DB_DATABASE=laravel`
 - `DB_USERNAME=sail`
 - `DB_PASSWORD=password`
+
+### Seeding demo data
+This project includes seeders for generating demo data:
+- clients
+- campaigns
+- campaign_data (per-user video records)
+- campaign_data_ingest_logs
+
+Note: Sail requires Docker to be running.
+
+Run seeders (Sail):
+
+```bash
+./vendor/bin/sail artisan db:seed
+```
+
+Recreate database + seed:
+
+```bash
+./vendor/bin/sail artisan migrate:fresh --seed
+```
+
+Tune dataset size via `.env` (defaults shown):
+- `SEED_CLIENTS=3`
+- `SEED_CAMPAIGNS=5`
+- `SEED_CAMPAIGN_DATA=1000`
+- `SEED_INGEST_LOGS_PER_CAMPAIGN=5`
+- `SEED_FAKER_SEED=123` (optional, for repeatable demo data)
 
 ## API
 Base URL: `/api`
