@@ -26,10 +26,7 @@ class IngestCampaignData implements ShouldQueue
 
     public function handle(): void
     {
-        $log = CampaignDataIngestLog::where('request_id', $this->requestId)->first();
-        if ($log) {
-            $log->update(['status' => 'processing']);
-        }
+        CampaignDataIngestLog::where('request_id', $this->requestId)->update(['status' => 'processing']);
 
         $received = count($this->rows);
         $inserted = 0;
@@ -84,16 +81,14 @@ class IngestCampaignData implements ShouldQueue
             }
         }
 
-        if ($log) {
-            $log->update([
-                'received_count' => $received,
-                'inserted_count' => $inserted,
-                'updated_count' => $updated,
-                'duplicate_count' => $updated,
-                'failed_count' => $failed,
-                'status' => 'completed',
-            ]);
-        }
+        CampaignDataIngestLog::where('request_id', $this->requestId)->update([
+            'received_count' => $received,
+            'inserted_count' => $inserted,
+            'updated_count' => $updated,
+            'duplicate_count' => $updated,
+            'failed_count' => $failed,
+            'status' => 'completed',
+        ]);
     }
 
     public function failed(\Throwable $e): void
