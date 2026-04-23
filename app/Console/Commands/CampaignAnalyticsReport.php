@@ -49,6 +49,7 @@ class CampaignAnalyticsReport extends Command
         $received = (clone $logQuery)->sum('received_count');
         $inserted = (clone $logQuery)->sum('inserted_count');
         $updated = (clone $logQuery)->sum('updated_count');
+        $duplicates = (clone $logQuery)->sum('duplicate_count');
         $failed = (clone $logQuery)->sum('failed_count');
 
         $this->line("Campaign: #{$campaign->id} {$campaign->name}");
@@ -65,6 +66,7 @@ class CampaignAnalyticsReport extends Command
         $this->line("  Received items:  {$received}");
         $this->line("  Inserted items:  {$inserted}");
         $this->line("  Updated items:   {$updated}");
+        $this->line("  Duplicates:      {$duplicates}");
         $this->line("  Failed items:    {$failed}");
 
         return self::SUCCESS;
