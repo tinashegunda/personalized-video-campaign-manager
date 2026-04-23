@@ -7,14 +7,28 @@ API-driven campaign management system for **personalized video campaigns**. Clie
 - Laravel 12.x
 - MySQL
 - Laravel Queues (uses the `jobs` table by default)
-- Docker via **Laravel Sail** (`laravel.build`)
+- Docker via **Laravel Sail**
 
 ## Project location
 This project is intended to live at:
 - `/var/www/personalized-video-campaign-manager`
 
 ## Setup (Laravel Sail)
-This repository is structured to run with Sail, but **this environment may not be able to generate Sail files automatically** (network + filesystem restrictions). In a normal dev environment, create with `laravel.build`:
+This repository is structured to run with Sail.
+
+### Run this repo locally
+
+```bash
+cp .env.example .env
+composer install
+php artisan key:generate
+
+./vendor/bin/sail up -d
+./vendor/bin/sail artisan migrate
+./vendor/bin/sail artisan queue:work
+```
+
+### Create a fresh project via laravel.build (optional)
 
 ```bash
 cd /var/www
